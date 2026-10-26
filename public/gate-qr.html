@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gate QR · Ami Hostlers Jaipur</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+  body { margin: 0; font-family: Poppins, system-ui, sans-serif; background: #FAFAF8; color: #252A27; }
+  .poster { max-width: 560px; margin: 24px auto; background: #fff; border-radius: 28px; overflow: hidden;
+    border: 1px solid #ECECE6; box-shadow: 0 10px 30px rgba(0,0,0,.06); text-align: center; }
+  .top { background: linear-gradient(135deg, #FADD73, #FFE99A 55%, #FFF3C4); padding: 28px 20px; }
+  .top h1 { margin: 0; font-size: 28px; font-weight: 800; }
+  .top p { margin: 6px 0 0; font-size: 15px; }
+  #qr { display: inline-block; padding: 18px; background: #fff; border-radius: 18px; margin: 26px 0 8px; border: 2px solid #ECECE6; }
+  .steps { text-align: left; padding: 6px 34px 28px; font-size: 15px; line-height: 1.9; }
+  .url { font-size: 12px; color: #7C837F; word-break: break-all; padding: 0 20px 20px; }
+  .print { display: block; margin: 0 auto 30px; border: 0; background: #FADD73; font: inherit; font-weight: 700;
+    padding: 12px 28px; border-radius: 14px; cursor: pointer; }
+  @media print { .print { display: none; } body { background: #fff; } .poster { box-shadow: none; margin: 0 auto; } }
+</style>
+</head>
+<body>
+  <div class="poster">
+    <div class="top">
+      <h1>Ami Hostlers Jaipur</h1>
+      <p>Visitors — scan to enter 📲</p>
+    </div>
+    <div id="qr"></div>
+    <div class="steps">
+      1️⃣ Scan this QR with your phone camera<br>
+      2️⃣ Fill your details and whom you are meeting<br>
+      3️⃣ Take a live photo<br>
+      4️⃣ Show the entry pass to the guard
+    </div>
+    <div class="url" id="url"></div>
+  </div>
+  <button class="print" onclick="window.print()">🖨️ Print this poster</button>
+<script>
+  const gate = new URLSearchParams(location.search).get('gate');
+  const link = location.origin + '/visit' + (gate ? '?gate=' + encodeURIComponent(gate) : '');
+  document.getElementById('url').textContent = link;
+  new QRCode(document.getElementById('qr'), { text: link, width: 300, height: 300, correctLevel: QRCode.CorrectLevel.M });
+</script>
+</body>
+</html>
